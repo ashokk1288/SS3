@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>product title1</title>
+   
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet"/>
+  </head>
+    <body>
+        <div class="container offset-3 ">
+            <div class="row mt-5 ">
+                <div class="col-6">
+            
+                  <div class="card">
+                    <div class="card-header bg-primary text-light">
+                      Featured
+
+                    </div>
+                    
+                  </div>
+                  <ul class="list-group list-group-flush" id="items">
+                    
+                  </ul>
+                     
+                      
+                </div>
+            </div>
+        </div> 
+       <!-- Button trigger modal -->
+
+
+
+     <!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#productModal">
+  Launch demo modal
+</button> -->
+
+<!-- Modal -->
+<div class="modal fade" id="productModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="productTitle" >Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="card mb-3">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img id="productImage" src="" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title" id="productPrice"></h5>
+                <p class="card-text" id="productDescription"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+    </body>
+
+
+   
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    
+    <script>
+      $(document).ready(function(){
+        // console.log('hi');
+        $('#items').html(' <img src="images/1494.gif" height=50 width=50/>');
+        $.ajax({
+          url:'https://fakestoreapi.com/products',
+
+          datatype:'json',
+
+          success:function(data){
+
+            $('#items').html('');
+            for(i=0;i<data.length;i++)
+            {
+              item='<li class="list-group-item " data-title="'+data[i].title+'" data-productid="'+data[i].id+'" data-price="'+data[i].
+              
+              price+'" data-image="'+data[i].image+'" data-description="'+data[i].description+'" id="pp'+data[i].id
+              +'" onclick="loadProduct('+data[i].id+');">'+data[i].title +'</li>';
+              
+            
+
+             $("#items").append(item); 
+              
+            }
+           
+            
+          }
+        }
+
+        );
+      });
+
+function loadProduct(id)
+
+{
+  pid = '#pp'+id;
+
+  console.log(id);
+
+  title = $(pid).attr('data-title');
+  img = $(pid).attr('data-image');
+  price = $(pid).attr('data-price');
+  description = $(pid).attr('data-description');
+
+//  console.log(title);
+//  console.log(img);
+//  console.log(price);
+//  console.log(description);
+$('#productTitle').html(title);
+$('#productImage').attr('src',img);
+$('#productPrice').html(price);
+$('#productDescription').html(description);
+$("#productModal").modal('show');
+}
+
+
+
+      console.log('hi');
+    </script>
+
+</html>
